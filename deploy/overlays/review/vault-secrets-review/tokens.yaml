@@ -1,0 +1,13 @@
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultStaticSecret
+metadata:
+  name: tokens
+spec:
+  type: kv-v2
+  vaultAuthRef: vault-auth
+  refreshAfter: 6h
+  mount: apps
+  path: qcon-api/review/tokens
+  destination:
+    name: tokens
+    create: true

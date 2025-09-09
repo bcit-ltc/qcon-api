@@ -1,0 +1,4 @@
+# Patch vault-secrets resources with environment-specific value
+- op: replace
+  path: /spec/mount
+  value: kubernetes-review

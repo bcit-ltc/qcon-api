@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: qcon-api
+  template:
+    metadata:
+      annotations:
+        config.linkerd.io/skip-outbound-ports: "443"
+    spec:
+      containers:
+        - name: qcon-api
+          env:
+            - name: GIT_TAG
+              value: 2.18.18 # {"$imagepolicy": "qcon:qcon-api-image-policy-stable:tag"}

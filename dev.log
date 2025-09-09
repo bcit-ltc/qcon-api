@@ -1,0 +1,34 @@
+INFO 2025-09-04 06:42:37,147 api.apps ready GIT_TAG: 0.0.1
+INFO 2025-09-04 06:42:37,150 api.apps ready IMAGE_TAG: 0.0.1
+INFO 2025-09-04 06:42:37,154 api.apps ready IMAGE_NAME: qcon-api
+WARNING 2025-09-04 06:42:37,157 api.apps ready qconapi has started in Dev Mode
+INFO 2025-09-04 06:42:37,301 api.apps ready ADMIN user created
+INFO 2025-09-04 06:42:37,307 api.apps ready API token added to admin user
+INFO 2025-09-04 06:42:37,820 api.apps ready GIT_TAG: 0.0.1
+INFO 2025-09-04 06:42:37,823 api.apps ready IMAGE_TAG: 0.0.1
+INFO 2025-09-04 06:42:37,825 api.apps ready IMAGE_NAME: qcon-api
+WARNING 2025-09-04 06:42:37,827 api.apps ready qconapi has started in Dev Mode
+INFO 2025-09-04 07:00:52,033 api.apps ready GIT_TAG: 0.0.1
+INFO 2025-09-04 07:00:52,036 api.apps ready IMAGE_TAG: 0.0.1
+INFO 2025-09-04 07:00:52,038 api.apps ready IMAGE_NAME: qcon-api
+WARNING 2025-09-04 07:00:52,040 api.apps ready qconapi has started in Dev Mode
+INFO 2025-09-04 07:00:52,534 api.apps ready GIT_TAG: 0.0.1
+INFO 2025-09-04 07:00:52,538 api.apps ready IMAGE_TAG: 0.0.1
+INFO 2025-09-04 07:00:52,539 api.apps ready IMAGE_NAME: qcon-api
+WARNING 2025-09-04 07:00:52,541 api.apps ready qconapi has started in Dev Mode
+INFO 2025-09-09 06:53:26,943 api.apps ready GIT_TAG: 0.0.1
+INFO 2025-09-09 06:53:26,948 api.apps ready IMAGE_TAG: 0.0.1
+INFO 2025-09-09 06:53:26,950 api.apps ready IMAGE_NAME: qcon-api
+WARNING 2025-09-09 06:53:26,951 api.apps ready qconapi has started in Dev Mode
+INFO 2025-09-09 06:53:27,425 api.apps ready GIT_TAG: 0.0.1
+INFO 2025-09-09 06:53:27,429 api.apps ready IMAGE_TAG: 0.0.1
+INFO 2025-09-09 06:53:27,430 api.apps ready IMAGE_NAME: qcon-api
+WARNING 2025-09-09 06:53:27,432 api.apps ready qconapi has started in Dev Mode
+INFO 2025-09-09 16:46:43,892 api.apps ready GIT_TAG: 0.0.1
+INFO 2025-09-09 16:46:43,897 api.apps ready IMAGE_TAG: 0.0.1
+INFO 2025-09-09 16:46:43,899 api.apps ready IMAGE_NAME: qcon-api
+WARNING 2025-09-09 16:46:43,900 api.apps ready qconapi has started in Dev Mode
+INFO 2025-09-09 16:46:44,396 api.apps ready GIT_TAG: 0.0.1
+INFO 2025-09-09 16:46:44,399 api.apps ready IMAGE_TAG: 0.0.1
+INFO 2025-09-09 16:46:44,401 api.apps ready IMAGE_NAME: qcon-api
+WARNING 2025-09-09 16:46:44,403 api.apps ready qconapi has started in Dev Mode

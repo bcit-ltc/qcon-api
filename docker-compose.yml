@@ -1,0 +1,61 @@
+version: "3"
+
+services:
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: qcon-api
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d qcon-api"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s # Optional: grace period before health checks begin
+
+    networks:
+      qcon-network:
+        aliases:
+          - postgres.local
+    
+
+  app:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    image: qcon-api
+    platform: linux/amd64
+    environment:
+      DEBUG: true
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: admin
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: localhost
+      POSTGRES_DB_NAME: qcon-api
+      POSTGRES_USER: postgres
+      API_KEY: 1234567890
+      DJANGO_SECRET_KEY: notveryS3cret
+      GIT_TAG: 0.0.1
+      IMAGE_TAG: 0.0.1
+      IMAGE_NAME: qcon-api
+      ELASTIC_APM_SECRET_TOKEN: test
+      ELASTIC_APM_SERVICE_NAME: qcon-api
+      ELASTIC_APM_SERVER_URL: http://localhost
+      ELASTIC_APM_DISABLE_SEND: true
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    hostname: api.local
+    networks:
+      qcon-network:
+        aliases:
+          - api.local
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+networks:
+  qcon-network:
+    driver: bridge
+    name: qcon-network

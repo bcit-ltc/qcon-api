@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata: # kpt-merge: /nginx-unprivileged-base-package-kustomization
+  name: kustomization
+  annotations:
+    config.kubernetes.io/local-config: "true"
+resources:
+  - deployment.yaml
+  - Kptfile
+  - service.yaml
+configMapGenerator:
+  - name: config
+    files:
+      - nginx.conf
+namePrefix: nginx-

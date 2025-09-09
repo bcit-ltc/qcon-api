@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qcon-api
+  template:
+    metadata:
+      labels:
+        app: qcon-api
+    spec:
+      serviceAccountName: qcon-api-serviceaccount
+      containers:
+        - name: nginx
+          envFrom:
+          - configMapRef:
+              name: elasticapm-config
+          volumeMounts:
+            - name: shared-data
+              mountPath: /var/www/html
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d
+        - name: postgres
+          image: postgres
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+            - secretRef:
+                name: postgres-credentials
+        - name: qcon-api
+          image: qcon-api
+          envFrom:
+            - secretRef:
+                name: postgres-credentials
+            - configMapRef:
+                name: elasticapm-config
+            - secretRef:
+                name: tokens
+            - secretRef:
+                name: admin-credentials
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 8000
+          #   initialDelaySeconds: 20
+          #   periodSeconds: 30
+          # livenessProbe:
+          #   tcpSocket:
+          #     port: 8000
+          #   initialDelaySeconds: 15
+          #   periodSeconds: 30
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+      volumes:
+        - name: shared-data
+          emptyDir: {}

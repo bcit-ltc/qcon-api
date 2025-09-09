@@ -1,0 +1,11 @@
+# This file is for teaching kustomize how to substitute names
+#
+---
+nameReference:
+
+  # Ensure Ingress backend service name matches the service
+  - kind: VaultStaticSecret
+    fieldSpecs:
+      - path: spec/tls/secretName
+        kind: Ingress
+

@@ -1,0 +1,31 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: package
+  annotations:
+    config.kubernetes.io/local-config: "true"
+upstream:
+  type: git
+  git:
+    repo: https://issues.ltc.bcit.ca/deployments/base-packages
+    directory: /bases/nginx-unprivileged
+    ref: main
+  updateStrategy: resource-merge
+upstreamLock:
+  type: git
+  git:
+    repo: https://issues.ltc.bcit.ca/deployments/base-packages
+    directory: /bases/nginx-unprivileged
+    ref: main
+    commit: 9791bc479b7377e7ffa47924dcd81abc5a7d9fbb
+info:
+  emails:
+    - courseproduction@bcit.ca
+  license: MPL-2.0
+  description: kustomize base package for nginx deployments
+pipeline:
+  validators:
+    - image: gcr.io/kpt-fn/kubeval:v0.2.0
+      configMap:
+        skip_kinds: "Kustomization"
+        strict: "true"

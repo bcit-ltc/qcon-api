@@ -1,0 +1,70 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+# Flux envsubst replaces variables found in `deploy-vars.env` or falls back to defaults
+#
+namespace: ${DEPLOY_NAMESPACE:=qcon-api}
+
+commonLabels:
+  environment: review
+
+# Prefix/Suffix required for VaultAuth configuration
+#
+namePrefix: qcon-api-
+nameSuffix: -review
+
+# Teach kustomize how to update generated names
+#
+configurations:
+  - kustomizeconfig.yaml
+
+commonAnnotations:
+  version: ${GIT_TAG:=stable}
+
+images:
+  - name: qcon-api
+    newName: ${IMAGE_NAME:=registry.ltc.bcit.ca/web-apps/qcon/qcon-api}
+    newTag: ${IMAGE_TAG:=stable}
+
+patches:
+  - target:
+      kind: Ingress
+    path: ingress-patch.yaml
+  # Adds GIT_TAG env var to deployment
+  - target:
+      kind: Deployment
+    path: deployment-patch.yaml
+
+  # Incorporate vault-secrets
+  #
+  # adds `-review` suffix to VaultAuth `spec.mount`
+  - target:
+      kind: VaultAuth
+    path: vault-secrets-review/vault-auth-patch.yaml
+
+components:
+  # Include environment-specific secrets
+  # - ./vault-secrets-review
+
+  # Required for VaultAuth role and serviceaccounts
+  - ../../base/components/vault-auth
+
+# For review branches, generate secrets here rather than import from Vault
+#
+secretGenerator:
+  - name: postgres-credentials
+    literals:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  - name: admin-credentials
+    literals:
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=devadmin
+  - name: tokens
+    literals:
+      - API_KEY=2222222222222222222222222222222222222222
+      - DJANGO_SECRET_KEY=d8&z=vqy5b#lu0=an1xx9b_7n480af=-gdnqwqvtrs&d6el9=(
+      - ELASTIC_APM_SECRET_TOKEN=bcitltctest
