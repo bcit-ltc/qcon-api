@@ -1,0 +1,41 @@
+{
+  "name": "review",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "remoteUser": "vscode",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/nix": {
+      "packages": [
+        "zsh",
+        "direnv",
+        "k3d",
+        "kubectl",
+        "kubeconform",
+        "kubernetes-helm",
+        "kubeval",
+        "kustomize",
+        "skaffold",
+        "yq"
+      ]
+    }
+  },
+  "postCreateCommand": ".devcontainer/scripts/post-create.sh",
+  "postStartCommand": ".devcontainer/scripts/post-start.sh",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      },
+      "extensions": [
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "ms-azuretools.vscode-containers",
+        "redhat.vscode-yaml",
+        "davidanson.vscode-markdownlint",
+        "github.vscode-github-actions",
+        "mkhl.direnv"
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+# Runs `.github/workflows/build-and-push-app.yaml`
+name: Build and push app/chart images
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-ship:
+    uses: bcit-ltc/.github/.github/workflows/build-and-push-app.yaml@main
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+      attestations: write
+    secrets: inherit
