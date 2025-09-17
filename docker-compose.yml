@@ -1,5 +1,4 @@
-version: "3"
-
+name: qcon-api
 services:
 
   postgres:

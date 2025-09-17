@@ -1,14 +1,14 @@
-# Base
-#
+# Dockerfile
+## Base
 FROM python:3.11-slim AS builder
 
-ENV ARCH amd64
-ENV PANDOC_VERSION 2.19.2
-ENV GET_PANDOC_URL https://github.com/jgm/pandoc/releases/download
+ENV ARCH=amd64
+ENV PANDOC_VERSION=2.19.2
+ENV GET_PANDOC_URL=https://github.com/jgm/pandoc/releases/download
 ENV PATH="/opt/venv/bin:/base:$PATH"
 
-ENV ANTLR_VERSION 4.12.0
-ENV ANTLR_HOME /root/.m2/repository/org/antlr/antlr4/
+ENV ANTLR_VERSION=4.12.0
+ENV ANTLR_HOME=/root/.m2/repository/org/antlr/antlr4/
 ENV CLASSPATH=$CLASSPATH:$ANTLR_HOME/$ANTLR_VERSION/antlr4-$ANTLR_VERSION-complete.jar
 
 COPY requirements.txt ./
@@ -33,7 +33,6 @@ RUN set -ex \
         && antlr4 -v $ANTLR_VERSION
 
 ## Build Formatter
-#
 WORKDIR /usr/src/formatter
 
 COPY antlr/formatter/formatter.g4 antlr/formatter/formatter.java ./
@@ -46,7 +45,6 @@ RUN set -ex \
     ;
 
 ## Build Sectioner
-#
 WORKDIR /usr/src/sectioner
 
 COPY antlr/sectioner/sectioner.g4 antlr/sectioner/sectioner.java ./
@@ -59,7 +57,6 @@ RUN set -ex \
     ;
 
 ## Build Splitter
-#
 WORKDIR /usr/src/splitter
 
 COPY antlr/splitter/splitter.g4 antlr/splitter/splitter.java ./
@@ -72,7 +69,6 @@ RUN set -ex \
     ;
 
 ## Build Questionparser
-#
 WORKDIR /usr/src/questionparser
 
 COPY antlr/questionparser/questionparser.g4 antlr/questionparser/questionparser.java ./
@@ -85,7 +81,6 @@ RUN set -ex \
     ;
 
 ## Build Endanswers
-#
 WORKDIR /usr/src/endanswers
 
 COPY antlr/endanswers/endanswers.g4 antlr/endanswers/endanswers.java ./
@@ -99,13 +94,12 @@ RUN set -ex \
 
 
 # Release
-#
 FROM python:3.11-slim AS release
 
-LABEL maintainer courseproduction@bcit.ca
+LABEL maintainer=courseproduction@bcit.ca
 
-ENV PYTHONUNBUFFERED 1
-ENV PATH /code:/opt/venv/bin:$PATH
+ENV PYTHONUNBUFFERED=1
+ENV PATH=/code:/opt/venv/bin:$PATH
 ARG VERSION
 ENV VERSION=${VERSION:-0.0.0}
 
@@ -121,22 +115,19 @@ RUN set -ex \
     ;
 
 # Copy env vars and init script
-#
 COPY manage.py ./
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Copy compiled pandoc app
-#
 COPY --from=builder /usr/bin/pandoc /usr/local/bin/
 COPY --from=builder /root/.cache /root/.cache
 COPY --from=builder /opt/venv /opt/venv
 
 # Copy compiled antlr libraries
-#
 COPY --from=builder /usr/src /antlr_build/
 
 # Copy app
-#
 COPY qcon qcon/
 COPY api api/
 COPY pandoc pandoc/

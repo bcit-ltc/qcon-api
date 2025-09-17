@@ -1,16 +1,43 @@
-__pycache__
-*.py?
-.Python
+# OS / Editor junk
 .DS_Store
-.dockerignore
-Dockerfile
-temp
-**/migrations
-**/.git
-**/.gitignore
-**/.vscode
-**/coverage
-README.md
-docker-compose.yml
-**/.DS_Store
-**/env
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+
+# VCS
+.git
+.gitignore
+.gitattributes
+.github/
+
+# Node.js
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+dist
+build
+out
+coverage
+
+# Kubernetes / Helm artifacts
+charts/**/.tgz
+.helmignore
+
+# Secrets / Env
+.env
+.env.*
+!.env.example   # keep template/example
+
+# Locally-retrieved app chart
+app-chart
+app-chart/**
