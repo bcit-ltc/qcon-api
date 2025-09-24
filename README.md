@@ -4,7 +4,7 @@
 
 ## Quick Start
 
-    docker run -p 8000:8000 registry.ltc.bcit.ca/web-apps/qcon/qcon-api
+    docker run -p 8000:8000 ghcr.io/bcit-ltc/qcon-api
 
 Open your browser to [http://localhost:8000](http://localhost:8000).
 
@@ -14,19 +14,13 @@ See [Qcon Usage and Examples](https://qcon-guide.ltc.bcit.ca) for documentation 
 
 ## Development
 
-See [developing.md](docs/developing.md) for information about the technology stack.
-
     docker compose up --build
-
-## Deploying `qcon-api`
-
-`qcon-api` can be deployed as a single docker container or as a scalable Kubernetes cluster workload. We use `kpt` and `kustomize` to apply resources to a cluster based on the target environment.
 
 ## Support
 
-If you need any help with `qcon`, please see the [Qcon Guide](https://qcon-guide.ltc.bcit.ca) or fill-out our [contact form](https://issues.ltc.bcit.ca/web-apps/qcon/qcon-user-guide).
+If you need any help with `qcon`, please see the [Qcon Guide](https://qcon-guide.ltc.bcit.ca) or [contact us](mailto:ltc_techops@bcit.ca).
 
-Please submit any `qcon-api` bugs, issues, and feature requests to...[courseproduction@bcit.ca](mailto:courseproduction@bcit.ca) or [bcit-ltc/qcon](https://issues.ltc.bcit.ca/web-apps/qcon/qcon-guide).
+Please submit any `qcon-api` bugs, issues, and feature requests to the [bcit-ltc/qcon-api](https://github.com/bcit-ltc/qcon-api) source code repo.
 
 ## License
 
