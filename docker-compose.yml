@@ -37,10 +37,6 @@ services:
       GIT_TAG: 0.0.1
       IMAGE_TAG: 0.0.1
       IMAGE_NAME: qcon-api
-      ELASTIC_APM_SECRET_TOKEN: test
-      ELASTIC_APM_SERVICE_NAME: qcon-api
-      ELASTIC_APM_SERVER_URL: http://localhost
-      ELASTIC_APM_DISABLE_SEND: true
     volumes:
       - .:/code
     ports:
