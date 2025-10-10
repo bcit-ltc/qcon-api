@@ -124,9 +124,8 @@ def endanswer(request):
 
     return Response("endanswer")
 
-
 class RootPath(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, format=None):
-        return Response(settings.GIT_TAG, status=200)
+        return Response(settings.APP_VERSION, status=200)

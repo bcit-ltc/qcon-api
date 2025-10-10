@@ -112,7 +112,7 @@ class Process:
 
         return {
                 'hostname': socket.gethostname(),
-                'version': settings.GIT_TAG,
+                'version': settings.APP_VERSION,
                 'status': status,
                 'statustext': statustext,
                 'images_count': str(self.images_extracted),

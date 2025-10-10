@@ -48,7 +48,7 @@ POSTGRES_HOST = os.getenv('POSTGRES_HOST')
 API_KEY = get_secret('API_KEY', required=True)
 
 # optional vars
-GIT_TAG = os.getenv('GIT_TAG', default='')
+APP_VERSION = os.getenv('APP_VERSION', default='')
 IMAGE_TAG = os.getenv('IMAGE_TAG', default='')
 IMAGE_NAME = os.getenv('IMAGE_NAME', default='')
  
@@ -137,7 +137,7 @@ ASGI_APPLICATION = 'qcon.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': get_secret("POSTGRES_DB_NAME", required=True),
+        'NAME': get_secret("POSTGRES_DB", required=True),
         'USER': get_secret("POSTGRES_USER", required=True),
         'PASSWORD': get_secret("POSTGRES_PASSWORD", required=True),
         'HOST': POSTGRES_HOST,
@@ -190,27 +190,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/var/www/html/static/'
-
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'temp/')
-# Qcon config
-QCON = {
-    'TEMP_FOLDER':
-    os.path.join(BASE_DIR, 'temp', 'resource', 'tempfile') + os.path.sep,
-    'TEMP_IMAGE_ROOT':
-    os.path.join(BASE_DIR, 'temp', 'resource', 'tempfile', 'media') +
-    os.path.sep,
-    'RESPONDUS_XML_ROOT':
-    os.path.join(BASE_DIR, 'temp', 'resource', 'xml') + os.path.sep,
-    'XML_QUESTION_URL':
-    '/ql/',
-    'XML_QUESTION_ROOT':
-    os.path.join(BASE_DIR, 'temp', 'resource', 'xml') + os.path.sep,
-    'DEFAULT_IMAGE_FOLDER':
-    '/assessment-assets/',
-    'QCON_INSTALL_SCRIPT_ROOT':
-    os.path.join(BASE_DIR, 'scripts', 'production') + os.path.sep,
-}
+MEDIA_ROOT = os.path.join(BASE_DIR, 'tmp/')
 
 LOGGING = {
     'version': 1,
