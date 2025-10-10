@@ -51,9 +51,7 @@ API_KEY = get_secret('API_KEY', required=True)
 GIT_TAG = os.getenv('GIT_TAG', default='')
 IMAGE_TAG = os.getenv('IMAGE_TAG', default='')
 IMAGE_NAME = os.getenv('IMAGE_NAME', default='')
-ELASTIC_APM_SERVICE_NAME = os.getenv('ELASTIC_APM_SERVICE_NAME')
-ELASTIC_APM_SECRET_TOKEN = get_secret('ELASTIC_APM_SECRET_TOKEN')
-ELASTIC_APM_SERVER_URL = os.getenv('ELASTIC_APM_SERVER_URL')
+ 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,7 +81,6 @@ CSRF_COOKIE_HTTPONLY = True
 # Application definition
 
 INSTALLED_APPS = [
-    'elasticapm.contrib.django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -102,21 +99,9 @@ INSTALLED_APPS = [
     'restapi'
 ]
 
-ELASTIC_APM = {
-# "DEBUG": True,
-# Set the required service name. Allowed characters:
-# a-z, A-Z, 0-9, -, _, and space
-'SERVICE_NAME': ELASTIC_APM_SERVICE_NAME,
-
-# Use if APM Server requires a secret token
-'SECRET_TOKEN': ELASTIC_APM_SECRET_TOKEN,
-
-# Set the custom APM Server URL (default: http://localhost:8200)
-'SERVER_URL': ELASTIC_APM_SERVER_URL,
-}
+ 
 
 MIDDLEWARE = [
-    'elasticapm.contrib.django.middleware.TracingMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -256,11 +241,6 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'custom'
         },
-        'elasticapm': {
-            'level': LOGGING_LEVEL,
-            'class': 'elasticapm.contrib.django.handlers.LoggingHandler',
-            'formatter': 'custom'
-        },
         'celery': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
@@ -285,7 +265,7 @@ LOGGING = {
             'propagate': False,
         },
         'api': {
-            'handlers': ['console','console_dev','elasticapm'],
+            'handlers': ['console','console_dev'],
             'level': LOGGING_LEVEL,
             'propagate': False,
         },
