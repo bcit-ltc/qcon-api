@@ -190,30 +190,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/var/www/html/static/'
-
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'temp/')
-# Qcon config
-QCON = {
-    'TEMP_FOLDER':
-    os.path.join(BASE_DIR, 'temp', 'resource', 'tempfile') + os.path.sep,
-    'TEMP_IMAGE_ROOT':
-    os.path.join(BASE_DIR, 'temp', 'resource', 'tempfile', 'media') +
-    os.path.sep,
-    'RESPONDUS_XML_ROOT':
-    os.path.join(BASE_DIR, 'temp', 'resource', 'xml') + os.path.sep,
-    'XML_QUESTION_URL':
-    '/ql/',
-    'XML_QUESTION_ROOT':
-    os.path.join(BASE_DIR, 'temp', 'resource', 'xml') + os.path.sep,
-    'DEFAULT_IMAGE_FOLDER':
-    '/assessment-assets/',
-    'QCON_INSTALL_SCRIPT_ROOT':
-    os.path.join(BASE_DIR, 'scripts', 'production') + os.path.sep,
-}
+MEDIA_ROOT = os.path.join(BASE_DIR, 'tmp/')
 
 LOGGING = {
-    'version': 1,
     'disable_existing_loggers': True,
     'filters': {
         'require_debug_true': {
