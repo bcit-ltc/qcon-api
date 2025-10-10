@@ -137,7 +137,7 @@ ASGI_APPLICATION = 'qcon.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': get_secret("POSTGRES_DB_NAME", required=True),
+        'NAME': get_secret("POSTGRES_DB", required=True),
         'USER': get_secret("POSTGRES_USER", required=True),
         'PASSWORD': get_secret("POSTGRES_PASSWORD", required=True),
         'HOST': POSTGRES_HOST,
