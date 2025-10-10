@@ -48,7 +48,7 @@ POSTGRES_HOST = os.getenv('POSTGRES_HOST')
 API_KEY = get_secret('API_KEY', required=True)
 
 # optional vars
-GIT_TAG = os.getenv('GIT_TAG', default='')
+APP_VERSION = os.getenv('APP_VERSION', default='')
 IMAGE_TAG = os.getenv('IMAGE_TAG', default='')
 IMAGE_NAME = os.getenv('IMAGE_NAME', default='')
  
