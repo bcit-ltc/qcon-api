@@ -25,8 +25,6 @@ from .process.endanswers import EndAnswerError
 from .process.parser import ParserError
 from .tasks import MarkDownConversionError
 
-import elasticapm
-elastic_client = elasticapm.get_client()
 
 # class FilenameLoggingAdapter(logging.LoggerAdapter):
 #     """
@@ -93,7 +91,7 @@ class TextConsumer(JsonWebsocketConsumer):
 
 
     def receive_json(self, content, **kwargs):
-        elastic_client.begin_transaction('main')
+        
 ###########################################
         # Save the file
 ###########################################
@@ -431,5 +429,4 @@ class TextConsumer(JsonWebsocketConsumer):
 ######################### Close Connection
         self.send(text_data=json.dumps(process.sendformat("Close", "", "")))
         self.close()
-
-        elastic_client.end_transaction('main')
+        

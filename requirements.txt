@@ -14,6 +14,5 @@ celery==5.2.7
 redis==4.3.4
 channels-redis==4.0.0
 psycopg2-binary==2.9.5
-elastic-apm==6.13.0
 jaro-winkler==2.0.3
 antlr4-tools==0.2
