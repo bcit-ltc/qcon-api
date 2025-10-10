@@ -194,6 +194,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'tmp/')
 
 LOGGING = {
+    'version': 1,
     'disable_existing_loggers': True,
     'filters': {
         'require_debug_true': {
