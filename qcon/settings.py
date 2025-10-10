@@ -20,18 +20,39 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Secrets loader: prefer files in /etc/secrets/{name}, fall back to env vars
+SECRETS_DIR = Path("/etc/secrets")
+
+def get_secret(name: str, default: str = None, required: bool = False) -> str:
+    """
+    Load a secret from /etc/secrets/{name} if present, otherwise from environment.
+    Strips trailing whitespace. If required and missing, raise an error.
+    """
+    file_path = SECRETS_DIR / name
+    if file_path.exists():
+        val = file_path.read_text(encoding="utf-8").strip()
+    else:
+        val = os.getenv(name, default)
+
+    if required and (val is None or val == ""):
+        raise RuntimeError(
+            f"Missing required secret: {name} (file {file_path} or env var {name})"
+        )
+
+    return val
+
 # mandatory vars
-ADMIN_USERNAME = os.getenv('ADMIN_USERNAME')
-ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
+ADMIN_USERNAME = get_secret('ADMIN_USERNAME', required=True)
+ADMIN_PASSWORD = get_secret('ADMIN_PASSWORD', required=True)
 POSTGRES_HOST = os.getenv('POSTGRES_HOST')
-API_KEY = os.environ.get('API_KEY')
+API_KEY = get_secret('API_KEY', required=True)
 
 # optional vars
 GIT_TAG = os.getenv('GIT_TAG', default='')
 IMAGE_TAG = os.getenv('IMAGE_TAG', default='')
 IMAGE_NAME = os.getenv('IMAGE_NAME', default='')
 ELASTIC_APM_SERVICE_NAME = os.getenv('ELASTIC_APM_SERVICE_NAME')
-ELASTIC_APM_SECRET_TOKEN = os.getenv('ELASTIC_APM_SECRET_TOKEN')
+ELASTIC_APM_SECRET_TOKEN = get_secret('ELASTIC_APM_SECRET_TOKEN')
 ELASTIC_APM_SERVER_URL = os.getenv('ELASTIC_APM_SERVER_URL')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,7 +63,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Defaults in `.secrets`
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
+SECRET_KEY = get_secret("DJANGO_SECRET_KEY", required=True)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -131,9 +152,9 @@ ASGI_APPLICATION = 'qcon.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ["POSTGRES_DB_NAME"],
-        'USER': os.environ["POSTGRES_USER"],
-        'PASSWORD': os.environ["POSTGRES_PASSWORD"],
+        'NAME': get_secret("POSTGRES_DB_NAME", required=True),
+        'USER': get_secret("POSTGRES_USER", required=True),
+        'PASSWORD': get_secret("POSTGRES_PASSWORD", required=True),
         'HOST': POSTGRES_HOST,
         'PORT': 5432,
     }
