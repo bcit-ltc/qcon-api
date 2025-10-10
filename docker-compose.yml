@@ -6,6 +6,7 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: qcon-api
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d qcon-api"]
       interval: 5s
@@ -37,15 +38,20 @@ services:
       GIT_TAG: 0.0.1
       IMAGE_TAG: 0.0.1
       IMAGE_NAME: qcon-api
+
     volumes:
       - .:/code
+
     ports:
       - 8000:8000
+
     hostname: api.local
+
     networks:
       qcon-network:
         aliases:
           - api.local
+
     depends_on:
       postgres:
         condition: service_healthy
