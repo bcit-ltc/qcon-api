@@ -33,7 +33,7 @@ services:
       POSTGRES_HOST: localhost
       POSTGRES_DB_NAME: qcon-api
       POSTGRES_USER: postgres
-      API_KEY: 1234567890
+      API_KEY: 01234567890
       DJANGO_SECRET_KEY: notveryS3cret
       GIT_TAG: 0.0.1
       IMAGE_TAG: 0.0.1
