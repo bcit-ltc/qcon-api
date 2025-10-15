@@ -31,7 +31,7 @@ services:
       ADMIN_PASSWORD: admin
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: localhost
-      POSTGRES_DB_NAME: qcon-api
+      POSTGRES_DB: qcon-api
       POSTGRES_USER: postgres
       API_KEY: 01234567890
       DJANGO_SECRET_KEY: notveryS3cret

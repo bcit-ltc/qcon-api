@@ -218,7 +218,7 @@ class JsonToScorm(APIView):
 
             return file_response
                 
-        return JsonResponse({"hostname": settings.GIT_TAG, "serializer_errors": ql_serializer.errors}, status=400)
+        return JsonResponse({"hostname": settings.APP_VERSION, "serializer_errors": ql_serializer.errors}, status=400)
 
 class RootPath(APIView):
     permission_classes = [AllowAny]
@@ -227,7 +227,7 @@ class RootPath(APIView):
         from .models import StatusResponse
         from .serializers import StatusResponseSerializer
 
-        status = StatusResponse(version_number=settings.GIT_TAG)
+        status = StatusResponse(version_number=settings.APP_VERSION)
         serializer = StatusResponseSerializer(status)
 
         return JsonResponse(serializer.data,
