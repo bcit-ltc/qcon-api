@@ -16,6 +16,8 @@ See [Qcon Usage and Examples](https://qcon-guide.ltc.bcit.ca) for documentation 
 
     docker compose up --build
 
+Additional info in the CONTRIBUTING.md file.
+
 ## Support
 
 If you need any help with `qcon`, please see the [Qcon Guide](https://qcon-guide.ltc.bcit.ca) or [contact us](mailto:ltc_techops@bcit.ca).
