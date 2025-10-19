@@ -23,12 +23,13 @@ load_dotenv()
 # Secrets loader: prefer files in /etc/secrets/{name}, fall back to env vars
 SECRETS_DIR = Path("/etc/secrets")
 
-def get_secret(name: str, default: str = None, required: bool = False) -> str:
+def get_secret(name: str, default: str = None, required: bool = False, subdirectory: str = None) -> str:
     """
     Load a secret from /etc/secrets/{name} if present, otherwise from environment.
     Strips trailing whitespace. If required and missing, raise an error.
     """
-    file_path = SECRETS_DIR / name
+    base_dir = SECRETS_DIR / subdirectory if subdirectory else SECRETS_DIR
+    file_path = base_dir / name
     if file_path.exists():
         val = file_path.read_text(encoding="utf-8").strip()
     else:
@@ -42,10 +43,10 @@ def get_secret(name: str, default: str = None, required: bool = False) -> str:
     return val
 
 # mandatory vars
-ADMIN_USERNAME = get_secret('ADMIN_USERNAME', required=True)
-ADMIN_PASSWORD = get_secret('ADMIN_PASSWORD', required=True)
-POSTGRES_HOST = os.getenv('POSTGRES_HOST')
-API_KEY = get_secret('API_KEY', required=True)
+ADMIN_USERNAME = get_secret('ADMIN_USERNAME', subdirectory='app-internal-credentials', required=True)
+ADMIN_PASSWORD = get_secret('ADMIN_PASSWORD', subdirectory='app-internal-credentials', required=True)
+POSTGRES_HOST = get_secret('POSTGRES_HOST', subdirectory='db-credentials', required=True)
+API_KEY = get_secret('API_KEY', subdirectory='api-key', required=True)
 
 # optional vars
 APP_VERSION = os.getenv('APP_VERSION', default='')
@@ -61,7 +62,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Defaults in `.secrets`
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_secret("DJANGO_SECRET_KEY", required=True)
+SECRET_KEY = get_secret("DJANGO_SECRET_KEY", subdirectory='app-internal-credentials', required=True)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -137,9 +138,9 @@ ASGI_APPLICATION = 'qcon.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': get_secret("POSTGRES_DB", required=True),
-        'USER': get_secret("POSTGRES_USER", required=True),
-        'PASSWORD': get_secret("POSTGRES_PASSWORD", required=True),
+        'NAME': get_secret("POSTGRES_DB", subdirectory='db-credentials', required=True),
+        'USER': get_secret("POSTGRES_USER", subdirectory='db-credentials', required=True),
+        'PASSWORD': get_secret("POSTGRES_PASSWORD", subdirectory='db-credentials', required=True),
         'HOST': POSTGRES_HOST,
         'PORT': 5432,
     }
