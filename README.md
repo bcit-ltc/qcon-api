@@ -1,6 +1,6 @@
 # Qcon-api
 
-`qcon-api` is a question converter that enables accurate text conversion from Word into an LMS import package. It requires the frontend, `qcon-web` to work correctly. Together, these apps form the [`Qcon` service](https://qcon.ltc.bcit.ca).
+`qcon-api` is a question converter that enables accurate text conversion from Word into an IMS package for Learning Management Systems. It requires the frontend, `qcon-web` to work correctly. Together, these apps form the [`Qcon` service](https://qcon.ltc.bcit.ca).
 
 ## Quick Start
 
