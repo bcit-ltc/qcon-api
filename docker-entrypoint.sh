@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-
 set -e
 
 >&2 echo "make Database migrations"
@@ -11,7 +10,6 @@ python manage.py migrate
 echo "-------------------------------------------------------------------------------------------\n"
 
 # Collect static files
-#
 >&2 echo "Collect static"
 python manage.py collectstatic --noinput
 
