@@ -97,6 +97,7 @@ RUN set -ex \
 FROM python:3.11-slim AS release
 
 LABEL maintainer=courseproduction@bcit.ca
+LABEL org.opencontainers.image.source=https://github.com/bcit-ltc/qcon-api
 
 ENV PYTHONUNBUFFERED=1
 ENV PATH=/code:/opt/venv/bin:$PATH

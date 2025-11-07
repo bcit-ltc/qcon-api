@@ -35,7 +35,7 @@ build/
 out/
 coverage/
 
-# Local scratch / caches
+# Local scratch / caches (scoped to repo root)
 tmp/
 .cache/
 .dockerignore-local
@@ -45,12 +45,10 @@ temp/
 charts/**/.tgz
 
 # Locally-retrieved app chart
-app-chart/
+app-chart
+app-chart/**
 
-# Secrets / Env
-.env
-.env.*
-!.env.example    # keep template/example file tracked
+# Secrets
 **/secrets*
 
 # Logs

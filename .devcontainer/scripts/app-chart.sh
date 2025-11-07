@@ -91,7 +91,9 @@ tdir="$(mktemp -d -p . .chart.XXXXXX)"
   mv -- "$CHART_DIR" "$stage"
 
   # Optional: resolve dependencies & lint (non-fatal)
-  # ( cd "$stage" && helm dependency build >/dev/null 2>&1 || true )
+  # Ensure required repos exist for dependency resolution, then vendor deps
+  helm repo add bcit-ltc https://bcit-ltc.github.io/helm-charts >/dev/null 2>&1 || true
+  ( cd "$stage" && helm dependency build )
   # ( cd "$stage" && helm lint || true )
 
   rm -rf -- "app-chart"

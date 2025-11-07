@@ -16,10 +16,14 @@ deploy:
         chartPath: app-chart
         namespace: app
         createNamespace: true
+        setValues:
+          frontend.image.registry: registry.localhost:5000
+          frontend.image.repository: app
         setValueTemplates:
-          image.registry: "{{.IMAGE_DOMAIN_app}}"
-          image.repository: "{{.IMAGE_REPO_NO_DOMAIN_app}}"
-          image.tag: "{{.IMAGE_TAG_app}}"
+          # frontend.image.registry: "{{.IMAGE_DOMAIN_app}}"
+          # frontend.image.repository: "{{.IMAGE_REPO_NO_DOMAIN_app}}"
+          frontend.image.tag: "{{.IMAGE_TAG_app}}"
+
 # FUTURE
 # - see https://skaffold.dev/docs/verify/ and https://skaffold.dev/docs/testers/structure/
 # 

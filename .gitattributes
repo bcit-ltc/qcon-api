@@ -1,1 +1,10 @@
-* text eol=lf
+# Text files and tooling
+*.sh text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.txt text eol=lf
+*.md text eol=lf
+*.Dockerfile text eol=lf
+docker-compose.yml text eol=lf
