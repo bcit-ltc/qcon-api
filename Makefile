@@ -99,7 +99,7 @@ check:
 	  fi; \
 	  echo ""; \
 	  if [ -z "$${GITHUB_PAT:-}" ]; then \
-	    echo "⚠️  GITHUB_PAT not set"; \
+	    echo "⚠️  GITHUB_PAT not set (required for private repos/packages)"; \
 	  else \
 	    echo "✅ GITHUB_PAT is set"; \
 	  fi; \
