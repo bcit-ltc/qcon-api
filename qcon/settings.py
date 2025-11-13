@@ -71,7 +71,6 @@ ADMIN_ENABLED = os.getenv('DEBUG', False) == 'true'
 LOGGING_LEVEL = 'INFO'
 
 if DEBUG:
-    POSTGRES_HOST = 'postgres'
     LOGGING_LEVEL = 'DEBUG'
     
 ALLOWED_HOSTS = ['*']
