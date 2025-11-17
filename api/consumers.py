@@ -169,26 +169,26 @@ class TextConsumer(JsonWebsocketConsumer):
         # Convert to txt for fixing numbering
 ###########################################
 
-        try:
-            process.convert_txt()
-            logger.info("convert txt DONE")
-        except Exception as e:
-            logger.error(e)
+        # try:
+        #     process.convert_txt()
+        #     logger.info("convert txt DONE")
+        # except Exception as e:
+        #     logger.error(e)
 
 ###########################################
         # Fix Numbering (broken lists)
 ###########################################
 
-        try:
-            process.fix_numbering()
-            logger.info("numbering fix DONE")
-        except Exception as e:
-            logger.error(e)
-            self.send(
-                text_data=json.dumps(process.sendformat("Error", str(e), "")))
-            # close connection
-            # self.send(text_data=json.dumps(process.sendformat("Close", "", "")))
-            return
+        # try:
+        #     process.fix_numbering()
+        #     logger.info("numbering fix DONE")
+        # except Exception as e:
+        #     logger.error(e)
+        #     self.send(
+        #         text_data=json.dumps(process.sendformat("Error", str(e), "")))
+        #     # close connection
+        #     # self.send(text_data=json.dumps(process.sendformat("Close", "", "")))
+        #     return
 
 ##########################################
         # run_formatter
