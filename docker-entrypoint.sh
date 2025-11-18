@@ -1,6 +1,13 @@
 #!/usr/bin/env sh
 set -e
 
+echo "Listing /etc/secrets contents (if present)..."
+if [ -d /etc/secrets ]; then
+  ls -al /etc/secrets
+else
+  echo "/etc/secrets directory does not exist"
+fi
+
 >&2 echo "make Database migrations"
 python manage.py makemigrations api
 echo "-------------------------------------------------------------------------------------------\n"
