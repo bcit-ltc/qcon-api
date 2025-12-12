@@ -1,6 +1,13 @@
 #!/usr/bin/env sh
 set -e
 
+>&2 echo "make Database migrations"
+python manage.py makemigrations api
+echo "-------------------------------------------------------------------------------------------\n"
+
+>&2 echo "Run Database migrations"
+python manage.py migrate
+echo "-------------------------------------------------------------------------------------------\n"
 
 echo "Listing /etc/secrets contents (if present)..."
 if [ -d /etc/secrets ]; then
@@ -18,13 +25,6 @@ echo "Sleeping for 600 seconds (10 minutes)..."
 sleep 600
 echo "Resuming normal startup sequence..."
 
->&2 echo "make Database migrations"
-python manage.py makemigrations api
-echo "-------------------------------------------------------------------------------------------\n"
-
->&2 echo "Run Database migrations"
-python manage.py migrate
-echo "-------------------------------------------------------------------------------------------\n"
 
 # Collect static files
 >&2 echo "Collect static"
